@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: false;
+}
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@theme {
+    --animate-float-scene: floatScene 6s ease-in-out infinite;
+    --animate-tail-swing: tailSwing 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    --animate-hand-swing: handSwing 5s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+    --animate-glitch-fade: glitchFade 3s ease-in-out infinite;
+    --animate-pulse-404: pulse404 3s ease-in-out infinite;
+    --font-mainFamily: "Open Sans", sans-serif;
+    --shadow-elevated-button:
+        0px 1px 3px 0px #6161610d, 0px 5px 5px 0px #6161610d, 0px 11px 6px 0px #61616108, 0px 19px 8px 0px #61616103,
+        0px 30px 8px 0px #61616100;
+
+    @keyframes pulse404 {
+        0%,
+        100% {
+            transform: scale(1);
+            fill: #52395b;
+        }
+
+        50% {
+            transform: scale(1.02);
+            fill: #5a4065;
+        }
+    }
+
+    @keyframes floatScene {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
+
+    @keyframes tailSwing {
+        0% {
+            transform: rotate(0deg);
+        }
+        25% {
+            transform: rotate(-6deg);
+        }
+        50% {
+            transform: rotate(4deg);
+        }
+        75% {
+            transform: rotate(-3deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes handSwing {
+        0%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        33% {
+            transform: rotate(-5deg);
+        }
+
+        66% {
+            transform: rotate(3deg);
+        }
+    }
+
+    @keyframes glitchFade {
+        0%,
+        100% {
+            opacity: 1;
+            letter-spacing: 0;
+        }
+
+        50% {
+            opacity: 0.85;
+            letter-spacing: 1px;
+        }
+    }
+
+    --animate-books: books 28s linear infinite;
+
+    @keyframes books {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+}
+
+@layer base {
+    input[type="number"] {
+        appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.books-slider {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.books-slider:hover .books-track {
+    animation-play-state: paused;
+}
