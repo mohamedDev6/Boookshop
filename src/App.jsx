@@ -8,7 +8,7 @@ export default function App() {
             <div className="font-mainFamily bg-[#F5F5F5] text-[#222222] overflow-hidden">
                 <BrowserRouter>
                     <AuthProvider>
-                        <AppRoutes className="p-6" />
+                        <AppRoutes />
                     </AuthProvider>
                 </BrowserRouter>
             </div>
