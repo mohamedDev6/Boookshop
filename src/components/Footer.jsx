@@ -77,7 +77,7 @@ export default function Footer() {
 
                 <div className="lang-rights w-full flex items-center justify-between max-sm:flex-wrap max-sm:gap-6">
                     <div className="copy-rights font-normal text-[14px] leading-[150%]">
-                        {"<Developed By> EraaSoft <All Copy Rights Reserved @2024>"}
+                        {"<Developed By> Mohamed Eslam <All Copy Rights Reserved @2024>"}
                     </div>
 
                     <div className="lang flex items-center gap-4 w-full md:w-[34%] lg:w-[24%] xl:w-[16%]">

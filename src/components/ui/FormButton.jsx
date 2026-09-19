@@ -1,4 +1,4 @@
-export default function BtnAuth({ btnMsg }) {
+export default function FormButton({ btnMsg }) {
     return (
         <>
             <button

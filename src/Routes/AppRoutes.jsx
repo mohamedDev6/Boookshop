@@ -3,8 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 // Layouts Components
 import PublicLayout from "../layouts/PublicLayout";
 
-// Context
-import { useAuth } from "../context/useAuth";
+// Stores
+import { useAuthStore } from "../stores/useAuthStore";
 
 // App Pages
 import Home from "../pages/app/Home";
@@ -16,25 +16,28 @@ import FavoriteBooks from "../pages/app/FavoriteBooks";
 import Wishlist from "../pages/app/Wishlist";
 
 // Authentication Pages
-import LogIn from "../pages/authentication/LogIn";
+import Login from "../pages/authentication/Login";
 import SignUp from "../pages/authentication/SignUp";
 import ForgetPassword from "../pages/authentication/ForgetPassword";
 import AddCode from "../pages/authentication/AddCode";
 import ResetPassword from "../pages/authentication/ResetPassword";
 
 export default function AppRoutes() {
-    const { token } = useAuth();
+    const { isAuthenticated } = useAuthStore();
 
     return (
         <>
             <Routes>
                 <Route element={<PublicLayout />}>
                     {/* Auth */}
-                    <Route path="/login" element={token ? <Navigate to="/" /> : <LogIn />} />
-                    <Route path="/signup" element={token ? <Navigate to="/" /> : <SignUp />} />
-                    <Route path="/forget-password" element={token ? <Navigate to="/" /> : <ForgetPassword />} />
-                    <Route path="/add-code" element={token ? <Navigate to="/" /> : <AddCode />} />
-                    <Route path="/reset-password" element={token ? <Navigate to="/" /> : <ResetPassword />} />
+                    <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
+                    <Route path="/signup" element={isAuthenticated ? <Navigate to="/" /> : <SignUp />} />
+                    <Route
+                        path="/forget-password"
+                        element={isAuthenticated ? <Navigate to="/" /> : <ForgetPassword />}
+                    />
+                    <Route path="/add-code" element={isAuthenticated ? <Navigate to="/" /> : <AddCode />} />
+                    <Route path="/reset-password" element={isAuthenticated ? <Navigate to="/" /> : <ResetPassword />} />
 
                     {/* App */}
                     <Route path="/" element={<Home />} />

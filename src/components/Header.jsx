@@ -4,15 +4,15 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import bookIcon from "../assets/Icons/book-bookmark.png";
 import userProfileImage from "../assets/Images/profile-img.jpeg";
-import { useAuth } from "../context/useAuth";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useAuthStore } from "../stores/useAuthStore";
 
 export default function HeaderBeforeLogIn() {
     const { pathname } = useLocation();
     const pageTitle = pathname.split("/")[1];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { token, setToken } = useAuth();
+    const { isAuthenticated, logout } = useAuthStore();
 
     return (
         <>
@@ -60,7 +60,7 @@ export default function HeaderBeforeLogIn() {
                     </nav>
                 </div>
 
-                {!token ? (
+                {!isAuthenticated ? (
                     <div className="hidden md:flex items-center gap-4 lg:gap-6">
                         <Link
                             to="/login"
@@ -94,7 +94,7 @@ export default function HeaderBeforeLogIn() {
 
                         <div
                             onClick={() => {
-                                setToken(null);
+                                logout();
                             }}
                             className="profile-pic flex items-center justify-center gap-2.5 cursor-pointer">
                             <img src={userProfileImage} alt="Profile" className="w-10 h-10 object-cover rounded-full" />
@@ -144,7 +144,7 @@ export default function HeaderBeforeLogIn() {
                         </ul>
                     </nav>
 
-                    {!token ? (
+                    {!isAuthenticated ? (
                         <div className="flex flex-col gap-3 mt-6">
                             <Link
                                 to="/login"
