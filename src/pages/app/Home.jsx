@@ -1,8 +1,5 @@
 // import { useEffect, useState } from "react";
 import { BsMic } from "react-icons/bs";
-import { TbTruckDelivery, TbShieldCheck, TbRefresh, TbHeadset } from "react-icons/tb";
-import { FaStar } from "react-icons/fa";
-import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import { GoSearch } from "react-icons/go";
 
 import book1 from "../../assets/Images/book-1.png";
@@ -13,6 +10,9 @@ import book5 from "../../assets/Images/book-5.jpg";
 import book6 from "../../assets/Images/book-6.jpg";
 import book7 from "../../assets/Images/book-7.jpg";
 import book8 from "../../assets/Images/book-8.png";
+import FeaturesSection from "../../components/FeaturesSection";
+import RecommendedCard from "../../components/ui/RecommendedCard";
+import FlashSaleCard from "../../components/ui/FlashSaleCard";
 
 export default function Home() {
     const booksImgs = [book1, book2, book3, book4, book5, book6, book7, book8];
@@ -89,52 +89,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="features-section py-30 px-15 flex items-center justify-center">
-                <div className="container grid w-11/12 gap-15.25 md:grid-cols-2 lg:grid-cols-4">
-                    <div className="feature-card flex flex-col gap-4">
-                        <TbTruckDelivery size={38} className="text-[#22222280]" />
-
-                        <h3 className="text-lg font-bold leading-[100%]">Fast & Reliable Shipping</h3>
-
-                        <p className="text-[16px] leading-[100%] text-[#22222280]">
-                            Get your favorite books delivered safely and quickly to your doorstep with our trusted
-                            shipping partners.
-                        </p>
-                    </div>
-
-                    <div className="feature-card flex flex-col gap-4">
-                        <TbShieldCheck size={38} className="text-[#22222280]" />
-
-                        <h3 className="text-lg font-bold leading-[100%]">Secure Payment</h3>
-
-                        <p className="text-[16px] leading-[100%] text-[#22222280]">
-                            Shop with confidence using encrypted and secure payment methods that protect your
-                            information.
-                        </p>
-                    </div>
-
-                    <div className="feature-card flex flex-col gap-4">
-                        <TbRefresh size={38} className="text-[#22222280]" />
-
-                        <h3 className="text-lg font-bold leading-[100%]">Easy Returns</h3>
-
-                        <p className="text-[16px] leading-[100%] text-[#22222280]">
-                            Changed your mind? Return eligible books easily with our simple and hassle-free return
-                            policy.
-                        </p>
-                    </div>
-
-                    <div className="feature-card flex flex-col gap-4">
-                        <TbHeadset size={38} className="text-[#22222280]" />
-
-                        <h3 className="text-lg font-bold leading-[100%]">24/7 Customer Support</h3>
-
-                        <p className="text-[16px] leading-[100%] text-[#22222280]">
-                            Our support team is always available to answer your questions and help you anytime.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <FeaturesSection />
 
             <section className="best-sellers-section bg-[#3B2F4A] py-30 overflow-hidden">
                 <div className="text-container mx-auto mb-20">
@@ -165,7 +120,7 @@ export default function Home() {
 
             <section className="recommended-section py-15 lg:py-30 px-7.5 lg:px-15">
                 <div className="flex flex-col items justify-center">
-                    <div className="text-container mb-10">
+                    <div className="section-title mb-10">
                         <h2 className="text-[26px] font-bold leading-[100%]">Recommended For You</h2>
 
                         <p className="mt-3 text-[16px] text-gray-500">
@@ -176,64 +131,15 @@ export default function Home() {
                     {recommendedBooks.length > 0 && (
                         <div className="recommended-books grid gap-6 xl:grid-cols-[650px_650px] justify-center">
                             {recommendedBooks.map((book) => (
-                                <div
+                                <RecommendedCard
                                     key={book.id}
-                                    className="recommended-card cursor-pointer flex flex-col items-center md:flex-row gap-10 rounded-4xl p-4 lg:p-10 shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                    <div className="book-image shrink-0">
-                                        <img
-                                            src={book.image}
-                                            alt={book.title}
-                                            className="h-66 w-44 rounded-lg object-cover"
-                                        />
-                                    </div>
-
-                                    <div className="book-details flex flex-1 flex-col justify-between gap-6">
-                                        <div>
-                                            <h3 className="text-[18px] font-bold">{book.title}</h3>
-
-                                            <p className="mt-1 text-sm text-[#22222280]">
-                                                Author: <span className="text-[#222222]">{book.author}</span>
-                                            </p>
-
-                                            <p className="mt-2 text-sm text-[#22222280]">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et
-                                                ultricies est. Aliquam in justo varius, sagittis neque ut, malesuada
-                                                leo. Aliquam in justo varius, Aliquam in justo varius,
-                                            </p>
-                                        </div>
-
-                                        <div className="book-rating mt-6 flex flex-wrap items-center justify-between gap-4">
-                                            <div>
-                                                <div className="flex items-center gap-1 text-[#EBC305]">
-                                                    {[...Array(5)].map((_, index) => (
-                                                        <FaStar
-                                                            key={index}
-                                                            className={index < 4 ? "" : "text-[#22222233] opacity-30"}
-                                                        />
-                                                    ))}
-                                                    <span className="text-[#22222280]">({book.reviews} Reviews)</span>
-                                                </div>
-
-                                                <p className="mt-2 text-sm text-[#222222]">
-                                                    <span className="text-[#22222280]">Rate:</span> {book.rating}
-                                                </p>
-                                            </div>
-
-                                            <span className="text-[26px] font-bold text-[#222222]">{book.price}</span>
-                                        </div>
-
-                                        <div className="book-actions mt-6 flex gap-4">
-                                            <button className="bg-[#D9176C] flex flex-1 items-center justify-center gap-2.5 px-4 py-3 text-white rounded-lg cursor-pointer hover:bg-transparent hover:text-[#D9176C] hover:border hover:border-[#D9176C] duration-300 ease-out">
-                                                Add To Cart
-                                                <FiShoppingCart size={18} />
-                                            </button>
-
-                                            <button className="bg-transparent px-4 py-3 rounded-lg cursor-pointer text-[#D9176C] border border-[#D9176C]">
-                                                <FiHeart size={20} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    bookImage={book.image}
+                                    bookTitle={book.title}
+                                    bookAuthor={book.author}
+                                    bookRating={book.rating}
+                                    bookReviews={book.reviews}
+                                    bookPrice={book.price}
+                                />
                             ))}
                         </div>
                     )}
@@ -269,67 +175,17 @@ export default function Home() {
                     {flashSaleBooks.length > 0 && (
                         <div className="flash-sale-grid w-full grid gap-6 xl:grid-cols-[500px_500px] xl:w-fit xl:mx-auto">
                             {flashSaleBooks.map((book) => (
-                                <div
+                                <FlashSaleCard
                                     key={book.id}
-                                    className="book-card w-full flex flex-col md:flex-row gap-6 items-center justify-center h-full overflow-hidden bg-[#3B2F4A] text-white cursor-pointer rounded-lg p-4 lg:p-4 transition duration-300 hover:-translate-y-2">
-                                    <div className="book-cover rounded-lg shrink-0">
-                                        <img src={book.image} alt={book.title} className="h-66 w-44 object-cover" />
-                                    </div>
-
-                                    <div className="book-details flex flex-1 flex-col gap-6 justify-between h-full">
-                                        <div className="flex flex-1 flex-col gap-6">
-                                            <div>
-                                                <h2 className="text-[16px] font-bold text-white">{book.title}</h2>
-                                                <p className="mt-2 text-[14px] text-[#FFFFFF80]">
-                                                    Author:
-                                                    <span className="font-medium text-white"> {book.author}</span>
-                                                </p>
-                                                <div className="flex items-center gap-1 mt-2 text-[#EBC305]">
-                                                    {[...Array(5)].map((_, index) => (
-                                                        <FaStar
-                                                            key={index}
-                                                            className={index < 4 ? "" : "text-[#FFFFFF80] opacity-30"}
-                                                        />
-                                                    ))}
-                                                    <span className="text-[#FFFFFF80] text-[14px]">
-                                                        ({book.reviews} Reviews)
-                                                    </span>
-                                                </div>
-                                                <p className="text-[14px] text-[#FFFFFF80]">
-                                                    Rate:
-                                                    <span className="ml-2 font-semibold text-white">{book.rating}</span>
-                                                </p>
-                                            </div>
-
-                                            <div>
-                                                <div className="flex items-center gap-3">
-                                                    <span className="text-[14px] text-[#FFFFFF80] line-through">
-                                                        {book.oldPrice}
-                                                    </span>
-
-                                                    <span className="text-[22px] font-bold text-white">
-                                                        {book.newPrice}
-                                                    </span>
-                                                </div>
-                                                <div className="mt-6">
-                                                    <div className="h-2 w-full rounded-full bg-[#FFFFFF1A]">
-                                                        <div className="h-full w-[72%] rounded-full bg-[#EAA451]"></div>
-                                                    </div>
-                                                    <p className="mt-3 text-[14px] text-[#FFFFFF80]">
-                                                        {book.count} books left
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="cart-button flex items-center w-full self-end">
-                                            <button className="flex items-center justify-center w-full gap-2 py-3 px-4 rounded-xl bg-[#F61B7A] text-white transition hover:brightness-110 cursor-pointer hover:bg-transparent hover:text-[#D9176C] hover:border hover:border-[#D9176C] duration-300 ease-out">
-                                                Add To Cart
-                                                <FiShoppingCart size={20} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    bookImage={book.image}
+                                    bookTitle={book.title}
+                                    bookAuthor={book.author}
+                                    bookRating={book.rating}
+                                    bookReviews={book.reviews}
+                                    bookOldPrice={book.oldPrice}
+                                    bookNewPrice={book.newPrice}
+                                    bookCount={book.count}
+                                />
                             ))}
                         </div>
                     )}
