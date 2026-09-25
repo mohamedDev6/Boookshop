@@ -13,6 +13,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import PasswordVisiabilityToggle from "../ui/PasswordVisiabilityToggle";
 import CheckboxBtn from "../ui/CheckboxBtn";
 import FormQLinkMsg from "../ui/FormQLinkMsg";
+import toast from "react-hot-toast";
 
 export default function SignUpForm() {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -31,14 +32,20 @@ export default function SignUpForm() {
                 password_confirmation: password_confirmation,
             });
             console.log("Registration response:", response.data.data);
+            toast.success("Logged in Successfully");
             login(response.data.data.token);
             navigate("/");
         } catch (error) {
             console.error("Error during registration:", error);
+            if (error.response && error.response.data && error.response.data.message) {
+                toast.error(`Registration failed: ${error.response.data.message}`);
+            } else {
+                toast.error("Registration failed: An unexpected error occurred.");
+            }
         }
     }
 
-    const loginSchema = yup.object({
+    const signUpSchema = yup.object({
         first_name: yup.string().required("First name is required"),
         last_name: yup.string().required("Last name is required"),
         email: yup.string().email("Invalid email address").required("Email is required"),
@@ -59,7 +66,7 @@ export default function SignUpForm() {
                 password_confirmation: "",
                 terms: false,
             }}
-            validationSchema={loginSchema}
+            validationSchema={signUpSchema}
             onSubmit={(values) => handleSubmit(values)}>
             <Form className="w-[90%] lg:w-[36%] md:w-[50%] flex items-center justify-center flex-col gap-10">
                 <div className="inputs w-full">

@@ -14,6 +14,7 @@ import AboutUs from "../pages/app/AboutUs";
 import NotFound from "../pages/NotFound";
 import FavoriteBooks from "../pages/app/FavoriteBooks";
 import Wishlist from "../pages/app/Wishlist";
+import Profile from "../pages/app/Profile";
 
 // Authentication Pages
 import Login from "../pages/authentication/Login";
@@ -41,11 +42,15 @@ export default function AppRoutes() {
 
                     {/* App */}
                     <Route path="/" element={<Home />} />
-                    <Route path="/books" element={<Books />} />
-                    <Route path="/books/show/:bookId" element={<Book />} />
-                    <Route path="/about-us" element={<AboutUs />} />
-                    <Route path="/favorite-books" element={<FavoriteBooks />} />
-                    <Route path="/wishlist" element={<Wishlist />} />
+                    <Route path="/about-us" element={!isAuthenticated ? <Navigate to="/" /> : <AboutUs />} />
+                    <Route path="/profile" element={!isAuthenticated ? <Navigate to="/" /> : <Profile />} />
+                    <Route path="/books" element={!isAuthenticated ? <Navigate to="/" /> : <Books />} />
+                    <Route path="/books/show/:bookId" element={!isAuthenticated ? <Navigate to="/" /> : <Book />} />
+                    <Route
+                        path="/favorite-books"
+                        element={!isAuthenticated ? <Navigate to="/" /> : <FavoriteBooks />}
+                    />
+                    <Route path="/wishlist" element={!isAuthenticated ? <Navigate to="/" /> : <Wishlist />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />

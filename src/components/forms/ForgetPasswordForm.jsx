@@ -33,7 +33,7 @@ export default function ForgetPasswordForm() {
             }
         }
     }
-    const loginSchema = yup.object({
+    const forgetPasswordSchema = yup.object({
         email: yup.string().email("Invalid email address").required("Email is required"),
     });
 
@@ -47,7 +47,7 @@ export default function ForgetPasswordForm() {
             </div>
 
             <Formik
-                validationSchema={loginSchema}
+                validationSchema={forgetPasswordSchema}
                 initialValues={{ email: "" }}
                 onSubmit={(values) => handleSubmit(values)}>
                 <Form className="w-[90%] lg:w-[36%] md:w-[50%] flex items-center justify-center flex-col gap-10">

@@ -7,12 +7,14 @@ import userProfileImage from "../assets/Images/profile-img.jpeg";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useAuthStore } from "../stores/useAuthStore";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function HeaderBeforeLogIn() {
     const { pathname } = useLocation();
     const pageTitle = pathname.split("/")[1];
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { isAuthenticated, logout } = useAuthStore();
+    const { isAuthenticated } = useAuthStore();
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     return (
         <>
@@ -93,15 +95,14 @@ export default function HeaderBeforeLogIn() {
                         </Link>
 
                         <div
-                            onClick={() => {
-                                logout();
-                            }}
-                            className="profile-pic flex items-center justify-center gap-2.5 cursor-pointer">
+                            onClick={() => setIsProfileOpen(!isProfileOpen)}
+                            className="profile-pic relative flex items-center justify-center gap-2.5 cursor-pointer">
                             <img src={userProfileImage} alt="Profile" className="w-10 h-10 object-cover rounded-full" />
                             <div className="profile-info flex flex-col">
                                 <p className="text-[16px] font-semibold">Mohamed Eslam</p>
                                 <p className="text-[14px] font-light text-[#FFFFFF80]">moo@gmail.com</p>
                             </div>
+                            {isProfileOpen && <ProfileDropdown />}
                         </div>
                     </div>
                 )}
@@ -178,7 +179,9 @@ export default function HeaderBeforeLogIn() {
                                 <span className="count text-white font-semibold">0</span>
                             </Link>
 
-                            <div className="profile-pic flex items-center justify-center gap-2.5 cursor-pointer">
+                            <div
+                                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                                className="profile-pic relative flex items-center justify-center gap-2.5 cursor-pointer">
                                 <img
                                     src={userProfileImage}
                                     alt="Profile"
@@ -188,6 +191,8 @@ export default function HeaderBeforeLogIn() {
                                     <p className="text-[16px] font-semibold">Mohamed Eslam</p>
                                     <p className="text-[14px] font-light text-[#FFFFFF80]">moo@gmail.com</p>
                                 </div>
+
+                                {isProfileOpen && <ProfileDropdown />}
                             </div>
                         </div>
                     )}
