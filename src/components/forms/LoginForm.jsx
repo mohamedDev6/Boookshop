@@ -31,7 +31,7 @@ export default function LoginForm() {
             });
             console.log("Login response:", response.data.data);
             toast.success("Logged in Successfully");
-            login(response.data.data.token, response.data.data.userInfo);
+            login(response.data.data.token, response.data.data.user);
             navigate("/");
         } catch (error) {
             console.error("Error during login:", error);
